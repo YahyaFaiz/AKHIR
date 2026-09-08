@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserManagerController extends Controller
@@ -98,7 +99,7 @@ class UserManagerController extends Controller
     public function destroy(User $user)
     {
         // Jangan hapus diri sendiri
-        if ($user->id === auth()->id()) {
+        if ($user->id === Auth::id()) {
             return back()->with('error', 'Tidak bisa menghapus akun sendiri.');
         }
 

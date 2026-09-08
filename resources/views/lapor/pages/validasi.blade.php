@@ -105,7 +105,7 @@
 
         <!-- MODAL (flat, like screenshot) -->
         <template x-teleport="body">
-            <div x-show="modalOpen" x-cloak class="fixed inset-0 z-[99] flex items-center justify-center">
+            <div x-show="modalOpen" x-cloak class="fixed inset-0 z-50 flex items-center justify-center">
                 <!-- Backdrop -->
                 <div x-show="modalOpen" x-transition:enter="ease-out duration-150" x-transition:enter-start="opacity-0"
                     x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-150"

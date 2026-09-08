@@ -1,10 +1,19 @@
 @extends('lapor.layouts.app')
-
 @section('body-class', 'bg-white')
-
 @section('content')
-    <div class="mx-auto max-w-6xl py-8 px-6 space-y-16">
 
+    <!-- Trik CSS untuk memaksa peta OpenStreetMap gratis menjadi Monokrom/Grayscale -->
+    <style>
+        .leaflet-tile {
+            filter: grayscale(100%) brightness(0.95) contrast(1.1) !important;
+        }
+
+        #map:focus {
+            outline: none;
+        }
+    </style>
+
+    <div class="mx-auto max-w-6xl py-8 px-6 space-y-16">
         <!-- HERO -->
         <section class="text-center">
             <div class="inline-block px-4 py-1 border border-neutral-500 text-xs tracking-widest uppercase">WebGIS Kampus
@@ -23,6 +32,18 @@
                 <div class="flex items-center gap-2"><span class="inline-block h-2 w-2 rounded-full bg-black"></span>
                     Terukur</div>
             </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="text-center">
+            <a href=""
+                class="relative inline-block px-10 py-4 border border-neutral-700 bg-black text-white text-lg font-extrabold uppercase rounded-md shadow-[4px_4px_0_#9ca3af] hover:translate-x-0.5 hover:-translate-y-0.5 transition">
+                Buat lapor
+                <span
+                    class="absolute -top-3 -right-3 bg-white border border-neutral-500 px-2 py-0.5 text-[10px] font-bold text-black rotate-3 shadow-[2px_2px_0_#9ca3af]">
+                    lapor
+                </span>
+            </a>
         </section>
 
         <!-- HIGHLIGHT FITUR (monokrom, border tipis, shadow abu) -->
@@ -53,23 +74,12 @@
             </div>
         </section>
 
-        <!-- CTA -->
-        <section class="text-center">
-            <a href=""
-                class="relative inline-block px-10 py-4 border border-neutral-700 bg-black text-white text-lg font-extrabold uppercase rounded-md shadow-[4px_4px_0_#9ca3af] hover:translate-x-0.5 hover:-translate-y-0.5 transition">
-                Buat lapor
-                <span
-                    class="absolute -top-3 -right-3 bg-white border border-neutral-500 px-2 py-0.5 text-[10px] font-bold text-black rotate-3 shadow-[2px_2px_0_#9ca3af]">
-                    lapor
-                </span>
-            </a>
-        </section>
-
-        <!-- MAP + STATS -->
+        <!-- MAP + STATS (relative z-0 ditambahkan ke kontainer map) -->
         <section x-data="statSection" x-init="startCount()" class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
             <!-- Map -->
             <div id="map"
-                class="lg:col-span-2 h-[420px] rounded-md border border-neutral-400 shadow-[4px_4px_0_#9ca3af]">
+                class="lg:col-span-2 rounded-md border border-neutral-400 shadow-[4px_4px_0_#9ca3af] relative z-0"
+                style="height: 420px;">
             </div>
 
             <!-- Stats -->
@@ -89,7 +99,7 @@
             </div>
         </section>
 
-        <!-- LEGEND (abu, bukan hitam pekat) -->
+        <!-- LEGEND -->
         <section class="flex flex-wrap justify-center gap-5 text-sm text-gray-700">
             <div class="flex items-center gap-2">
                 <span class="inline-block"
@@ -108,9 +118,9 @@
             <div class="flex items-center gap-2">
                 <span class="inline-block align-middle"
                     style="width:14px;height:14px;background:
-                    linear-gradient(45deg,transparent 45%,#000 45%,#000 55%,transparent 55%),
-                    linear-gradient(-45deg,transparent 45%,#000 45%,#000 55%,transparent 55%);
-                    border:1px solid #9ca3af;background-color:#fff"></span>
+                linear-gradient(45deg,transparent 45%,#000 45%,#000 55%,transparent 55%),
+                linear-gradient(-45deg,transparent 45%,#000 45%,#000 55%,transparent 55%);
+                border:1px solid #9ca3af;background-color:#fff"></span>
                 Ditolak
             </div>
         </section>
@@ -144,9 +154,9 @@
                 zoomControl: true
             }).setView([-0.056, 109.343], 16);
 
-            // Grayscale tiles
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap & CartoDB'
+            // tileLayer diganti ke OpenStreetMap Standard (Gratis & Stabil)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
             const reports = [{
@@ -185,11 +195,10 @@
                 if (shape === 'diamond') {
                     return `<div style="width:14px;height:14px;background:#000;transform:rotate(45deg);border:1px solid #fff;box-shadow:0 0 4px rgba(0,0,0,0.25)"></div>`;
                 }
-                // 'x'
                 return `<div style="width:16px;height:16px;background:
-                        linear-gradient(45deg,transparent 45%,#000 45%,#000 55%,transparent 55%),
-                        linear-gradient(-45deg,transparent 45%,#000 45%,#000 55%,transparent 55%);
-                        border:1px solid #9ca3af;background-color:#fff;box-shadow:0 0 3px rgba(0,0,0,0.15)"></div>`;
+                    linear-gradient(45deg,transparent 45%,#000 45%,#000 55%,transparent 55%),
+                    linear-gradient(-45deg,transparent 45%,#000 45%,#000 55%,transparent 55%);
+                    border:1px solid #9ca3af;background-color:#fff;box-shadow:0 0 3px rgba(0,0,0,0.15)"></div>`;
             };
 
             reports.forEach(r => {
@@ -215,7 +224,7 @@
                     } = pos.coords;
                     const icon = L.divIcon({
                         html: `<div style="width:18px;height:18px;border-radius:50%;
-                               background:#fff;border:3px solid #9ca3af;box-shadow:0 0 6px rgba(0,0,0,0.25)"></div>`
+                           background:#fff;border:3px solid #9ca3af;box-shadow:0 0 6px rgba(0,0,0,0.25)"></div>`
                     });
                     if (!userMarker) {
                         userMarker = L.marker([lat, lng], {

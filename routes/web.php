@@ -47,9 +47,14 @@ Route::get('/api/categories', function () {
     ]);
 });
 
-// ── DASHBOARD (semua user yang sudah login) ───────────────────────────────────
-Route::middleware(['auth', 'verified'])->group(function () {
+// ── DASHBOARD (hanya admin_it & operator) ────────────────────────────────────
+Route::middleware(['auth', 'verified', 'role:admin_it,operator'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
+});
+
+// ── halaman kelola admin ─────────────────────────────────────────────
+Route::middleware(['auth', 'verified', 'role:admin_it,operator'])->group(function () {
+    Route::view('kelolaadmin', 'kelolaadmin')->name('kelolaadmin');
 });
 
 // ── PELAPOR — halaman buat laporan ───────────────────────────────────────────

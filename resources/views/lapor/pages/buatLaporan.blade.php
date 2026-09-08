@@ -1,7 +1,7 @@
 @extends('lapor.layouts.app')
 
 @section('content')
-    <div class="max-w-xl w-full mx-auto px-4 py-8 md:py-5" x-data="pinesForm()" x-init="init()" x-cloak>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6" x-data="pinesForm()" x-init="init()" x-cloak>
 
         <!-- HEADER -->
         @include('lapor.partials.buatLaporan.header')
@@ -168,7 +168,7 @@
             <!-- ACTIONS -->
             <div class="flex items-center justify-between gap-3 pt-1">
                 <button type="submit"
-                    class="w-[100%] px-6 py-2 h-11 text-sm font-extrabold rounded-md text-white bg-black border border-neutral-700 hover:-translate-y-0.5 hover:translate-x-0.5 shadow-[3px_3px_0_#9ca3af] transition">
+                    class="w-full px-6 py-2 h-11 text-sm font-extrabold rounded-md text-white bg-black border border-neutral-700 hover:-translate-y-0.5 hover:translate-x-0.5 shadow-[3px_3px_0_#9ca3af] transition">
                     Kirim
                 </button>
             </div>
@@ -230,7 +230,7 @@
                         <div id="mapPicker" class="absolute inset-0 z-0"></div>
 
                         <!-- marker di atas map -->
-                        <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-[700]">
+                        <div class="pointer-events-none absolute inset-0 flex items-center justify-center z-700">
                             <!-- pulsasi -->
                             <div class="absolute w-16 h-16 rounded-full bg-black/5 border border-black/10 animate-ping">
                             </div>
