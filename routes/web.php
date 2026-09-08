@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\UserManagerController;
+use App\Http\Controllers\Operator\LaporanController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');
@@ -45,12 +47,14 @@ Route::get('/api/categories', function () {
     ]);
 });
 
+// ── DASHBOARD (semua user yang sudah login) ───────────────────────────────────
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
 
+// ── PELAPOR — halaman buat laporan ───────────────────────────────────────────
 $pages = [
-    'lapor' => 'lapor.pages.buatLaporan',
+    'lapor'    => 'lapor.pages.buatLaporan',
     'validasi' => 'lapor.pages.validasi',
 ];
 
@@ -59,5 +63,23 @@ foreach ($pages as $uri => $view) {
     // ->middleware(['auth', 'verified'])
         ->name($uri);
 }
+
+// ── OPERATOR & ADMIN IT — kelola laporan ─────────────────────────────────────
+Route::middleware(['auth', 'role:operator,admin_it'])
+    ->prefix('operator')
+    ->name('operator.')
+    ->group(function () {
+        Route::get('/laporan',          [LaporanController::class, 'index'])->name('laporan.index');
+        Route::get('/laporan/{id}',     [LaporanController::class, 'show'])->name('laporan.show');
+        Route::patch('/laporan/{id}',   [LaporanController::class, 'update'])->name('laporan.update');
+    });
+
+// ── ADMIN IT SAJA — kelola pengguna ──────────────────────────────────────────
+Route::middleware(['auth', 'role:admin_it'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('users', UserManagerController::class);
+    });
 
 require __DIR__.'/settings.php';

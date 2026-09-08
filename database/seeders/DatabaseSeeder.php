@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +16,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // ── Super Admin IT ────────────────────────────────────
+        User::create([
+            'name'        => 'Admin IT',
+            'email'       => 'admin@kampus.ac.id',
+            'password'    => Hash::make('password123'),
+            'role'        => 'admin_it',
+            'scope_level' => null,
+            'scope_id'    => null,
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // ── Operator Fakultas Teknik (scope_id = 1) ───────────
+        User::create([
+            'name'        => 'Operator Teknik',
+            'email'       => 'op.teknik@kampus.ac.id',
+            'password'    => Hash::make('password123'),
+            'role'        => 'operator',
+            'scope_level' => 'fakultas',
+            'scope_id'    => 1,
+        ]);
+
+        // ── Operator Prodi Informatika (scope_id = 3) ─────────
+        User::create([
+            'name'        => 'Operator Informatika',
+            'email'       => 'op.informatika@kampus.ac.id',
+            'password'    => Hash::make('password123'),
+            'role'        => 'operator',
+            'scope_level' => 'prodi',
+            'scope_id'    => 3,
+        ]);
+
+        // ── Pelapor contoh ─────────────────────────────────────
+        User::create([
+            'name'        => 'Mahasiswa Contoh',
+            'email'       => 'mahasiswa@kampus.ac.id',
+            'password'    => Hash::make('password123'),
+            'role'        => 'pelapor',
+            'scope_level' => null,
+            'scope_id'    => null,
         ]);
     }
 }

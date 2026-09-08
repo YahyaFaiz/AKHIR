@@ -65,6 +65,9 @@
             </div>
         </div>
 
+        {{-- MAP LEAFLET --}}
+        <div class="mb-6 rounded-xl overflow-hidden border border-neutral-300" style="height: 320px;" id="map"></div>
+
         <div class="text-center mb-8">
             <p class="mt-2 text-neutral-700">Daftar lapor kerusakan terbaru</p>
         </div>
@@ -199,4 +202,22 @@
         </template>
 
     </div>
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var map = L.map('map').setView([-5.147665, 119.432731], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Marker contoh
+        L.marker([-5.147665, 119.432731])
+            .addTo(map)
+            .bindPopup('<b>Lokasi Kampus</b>')
+            .openPopup();
+    });
+</script>
+@endpush
 @endsection
