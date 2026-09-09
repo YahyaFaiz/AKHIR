@@ -75,12 +75,12 @@
                     <button type="button" @click="categoryGroup='kelas'; resetCategory()"
                         :class="categoryGroup === 'kelas' ? 'bg-black text-white' : 'bg-white text-black'"
                         class="inline-flex items-center gap-2 rounded-md border border-neutral-700 px-3 py-2 text-sm">
-                        Internal
+                        Fasilitas Kelas
                     </button>
                     <button type="button" @click="categoryGroup='luar'; resetCategory()"
                         :class="categoryGroup === 'luar' ? 'bg-black text-white' : 'bg-white text-black'"
                         class="inline-flex items-center gap-2 rounded-md border border-neutral-700 px-3 py-2 text-sm">
-                        External
+                        Fasilitas Gedung
                     </button>
                 </div>
 
@@ -168,7 +168,7 @@
             <!-- ACTIONS -->
             <div class="flex items-center justify-between gap-3 pt-1">
                 <button type="submit"
-                    class="w-full px-6 py-2 h-11 text-sm font-extrabold rounded-md text-white bg-black border border-neutral-700 hover:-translate-y-0.5 hover:translate-x-0.5 shadow-[3px_3px_0_#9ca3af] transition">
+                    class="W-full px-6 py-2 h-11 text-sm font-extrabold rounded-md text-white bg-black border border-neutral-700 hover:-translate-y-0.5 hover:translate-x-0.5 shadow-[3px_3px_0_#9ca3af] transition">
                     Kirim
                 </button>
             </div>

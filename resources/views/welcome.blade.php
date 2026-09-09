@@ -36,7 +36,7 @@
 
         <!-- CTA -->
         <section class="text-center">
-            <a href=""
+            <a href="{{ route('lapor') }}"
                 class="relative inline-block px-10 py-4 border border-neutral-700 bg-black text-white text-lg font-extrabold uppercase rounded-md shadow-[4px_4px_0_#9ca3af] hover:translate-x-0.5 hover:-translate-y-0.5 transition">
                 Buat lapor
                 <span
@@ -69,8 +69,8 @@
             <div
                 class="relative bg-white border border-neutral-400 rounded-md p-6 text-left shadow-[4px_4px_0_#9ca3af] hover:translate-x-0.5 hover:-translate-y-0.5 transition">
                 <div class="text-3xl">🧾</div>
-                <h3 class="mt-3 font-extrabold text-lg uppercase tracking-wide">Audit & Ekspor</h3>
-                <p class="mt-2 text-gray-700">Jejak perubahan. Ekspor CSV/PDF.</p>
+                <h3 class="mt-3 font-extrabold text-lg uppercase tracking-wide">Rekap & Ekspor</h3>
+                <p class="mt-2 text-gray-700">Jejak penanganan. Ekspor PDF & CSV.</p>
             </div>
         </section>
 

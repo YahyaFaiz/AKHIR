@@ -26,6 +26,18 @@
                     :current="request()->routeIs('kelolaadmin')" wire:navigate>
                     {{ __('Kelola Admin') }}
                 </flux:sidebar.item>
+
+
+                <flux:sidebar.item icon="map" :href="route('pemetaanwilayah')"
+                    :current="request()->routeIs('pemetaanwilayah')" wire:navigate>
+                    {{ __('Pemetaan Wilayah') }}
+                </flux:sidebar.item>
+
+                <!-- Kelompok Fitur Tambahan (Expandable) -->
+                {{-- <flux:sidebar.group expandable heading="Modul Operasional" class="grid">
+                    <flux:sidebar.item href="#" icon="document-text">{{ __('Laporan Masuk') }}</flux:sidebar.item>
+                    <flux:sidebar.item href="#" icon="check-badge">{{ __('Validasi Voting') }}</flux:sidebar.item>
+                </flux:sidebar.group> --}}
             </flux:sidebar.group>
         </flux:sidebar.nav>
 
