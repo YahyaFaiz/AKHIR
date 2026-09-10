@@ -14,30 +14,50 @@
         </flux:sidebar.header>
 
         <flux:sidebar.nav>
-            <flux:sidebar.group :heading="__('Platform')" class="grid">
+            <flux:sidebar.group :heading="__('Dashboard')" class="grid">
                 <!-- Dashboard tetap pakai home -->
                 <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')"
                     wire:navigate>
                     {{ __('Dashboard') }}
                 </flux:sidebar.item>
 
-                <!-- Kelola Admin ganti pakai users atau shield-check -->
-                <flux:sidebar.item icon="users" :href="route('kelolaadmin')"
-                    :current="request()->routeIs('kelolaadmin')" wire:navigate>
-                    {{ __('Kelola Admin') }}
-                </flux:sidebar.item>
 
 
-                <flux:sidebar.item icon="map" :href="route('pemetaanwilayah')"
-                    :current="request()->routeIs('pemetaanwilayah')" wire:navigate>
-                    {{ __('Pemetaan Wilayah') }}
-                </flux:sidebar.item>
+
 
                 <!-- Kelompok Fitur Tambahan (Expandable) -->
-                {{-- <flux:sidebar.group expandable heading="Modul Operasional" class="grid">
-                    <flux:sidebar.item href="#" icon="document-text">{{ __('Laporan Masuk') }}</flux:sidebar.item>
-                    <flux:sidebar.item href="#" icon="check-badge">{{ __('Validasi Voting') }}</flux:sidebar.item>
-                </flux:sidebar.group> --}}
+                <flux:sidebar.group expandable heading="Kelola laporan & Spasial" class="grid">
+                    <flux:sidebar.item icon="map" :href="route('pemetaanwilayah')"
+                        :current="request()->routeIs('pemetaanwilayah')" wire:navigate>
+                        {{ __('Pemetaan Wilayah') }}
+                    </flux:sidebar.item>
+
+                    <flux:sidebar.item icon="document-magnifying-glass" :href="route('laporanmasuk')"
+                        :current="request()->routeIs('laporanmasuk')" wire:navigate>
+                        {{ __('Laporan Masuk') }}
+                    </flux:sidebar.item>
+
+                </flux:sidebar.group>
+                <!-- Kelompok Fitur Tambahan (Expandable) -->
+                <flux:sidebar.group expandable heading="Kelola Fasilitas & Akun" class="grid">
+                    <flux:sidebar.item icon="users" :href="route('kelolaketegori')"
+                        :current="request()->routeIs('kelolaketegori')" wire:navigate>
+                        {{ __('Kategori & Subkategori') }}
+                    </flux:sidebar.item>
+                    <flux:sidebar.item icon="users" :href="route('keloladatagedung')"
+                        :current="request()->routeIs('keloladatagedung')" wire:navigate>
+                        {{ __('Data Gedung & Scope') }}
+                    </flux:sidebar.item>
+
+
+                    <!-- Kelola Admin ganti pakai users atau shield-check -->
+                    <flux:sidebar.item icon="users" :href="route('kelolaadmin')"
+                        :current="request()->routeIs('kelolaadmin')" wire:navigate>
+                        {{ __('Kelola Admin') }}
+                    </flux:sidebar.item>
+
+
+                </flux:sidebar.group>
             </flux:sidebar.group>
         </flux:sidebar.nav>
 

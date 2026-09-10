@@ -143,9 +143,18 @@ Route::middleware(['auth', 'verified', 'role:admin_it,operator'])->group(functio
     Route::view('pemetaanwilayah', 'pemetaanwilayah')->name('pemetaanwilayah');
 });
 
+// halaman laporan masuk admin
+Route::middleware(['auth', 'verified', 'role:admin_it,operator'])->group(function () {
+    Route::view('laporanmasuk', 'laporanmasuk')->name('laporanmasuk');
+});
 
+Route::middleware(['auth', 'verified', 'role:admin_it,operator'])->group(function () {
+    Route::view('kelolaketegori', 'kelolaketegori')->name('kelolaketegori');
+});
 
-
+Route::middleware(['auth', 'verified', 'role:admin_it,operator'])->group(function () {
+    Route::view('keloladatagedung', 'keloladatagedung')->name('keloladatagedung');
+});
 
 // ── PELAPOR — halaman buat laporan ───────────────────────────────────────────
 $pages = [
